@@ -1,15 +1,17 @@
 <!doctype html>
 <html>
 <head>
-<title>Examples</title>
+<title>Interactive templating Examples</title>
 <meta charset="UTF-8">
 </head>
 <body>
 
+<h1>Interactive templating Examples</h1>
+
 <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   
 <!-- ractive -->
-<script src="http_cdn.ractivejs.org_0.7.3_ractive.min.js"></script>
+<script src="http://cdn.ractivejs.org/0.7.3/ractive.min.js"></script>
 <script>
 Ractive.DEBUG = false;
 </script>
@@ -17,10 +19,10 @@ Ractive.DEBUG = false;
 <!-- items example -->
 <div id="container_for_items_example"></div>
 <script id="template_for_items_example" type="text/ractive"> 
-<h1>#ractive Items listing 
+<h2>#ractive Items listing 
   (ported from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html">ReactJS example</a>
   )
-</h1>
+</h2>
 <input id="items" placeholder="Search filter"><br>
 <input type="checkbox" id="available">hide unavailable items<br>
 {{#each items}}
@@ -71,7 +73,7 @@ $(function(){
 <!-- customers example -->
 <div id="container_for_customers_example"></div>
 <script id="template_for_customers_example" type="text/ractive">     
-<h1>#ractive RactiveJS implementation of linked select</h1>
+<h2>#ractive RactiveJS implementation of linked select</h2>
 
 <span>Customers: </span>
 <select id="_customers">
@@ -115,7 +117,7 @@ $(function(){
 <!-- 2way example -->
 <div id="container_for_2way_example"></div>
 <script id="template_for_2way_example" type="text/ractive"> 
-    <h1>#ractive Two way data binding</h1>
+    <h2>#ractive Two way data binding</h2>
     <input placeholder="Type your name" value="{{user.name}}">
     <input placeholder="Type your age" value="{{user.age}}">
     <p>name: {{user.name}}</p>
@@ -149,7 +151,7 @@ $(function(){
 <br>
 
 <!-- jquery -->
-<h1>#jquery JQuery implementation of linked select</h1>
+<h2>#jquery JQuery implementation of linked select</h2>
 <span>Customers: </span><select id="customers"></select> <br>
 <span>Order ID: </span><select id="orders"></select> <br>
 <script>
@@ -187,20 +189,20 @@ $(function(){
         });
     }
     
-	var select_customers = $("select#customers");
-	select_customers.on("change", customers_on_change);
-	http_get("customers.txt", {}, function(data){
-		var string = data;
-		var lines = string.split("\n");
-		for(line in lines){
-			var fields = lines[line].split(",");
-			if(fields.length!=2) continue;
-			var customer_id = fields[0];
-			var name = fields[1];
-			select_customers.append($("<option>", {value: customer_id, text: name}));
-		}
+  var select_customers = $("select#customers");
+  select_customers.on("change", customers_on_change);
+  http_get("customers.txt", {}, function(data){
+    var string = data;
+    var lines = string.split("\n");
+    for(line in lines){
+      var fields = lines[line].split(",");
+      if(fields.length!=2) continue;
+      var customer_id = fields[0];
+      var name = fields[1];
+      select_customers.append($("<option>", {value: customer_id, text: name}));
+    }
     customers_on_change();
-	});	
+  });
 });
 </script>  
 
