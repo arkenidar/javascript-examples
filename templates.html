@@ -16,6 +16,9 @@ body {
   background: #fafafa;
   position: relative;
 }
+
+p, a { font-size: 150%; }
+
 </style>
 
 </head>
@@ -25,8 +28,15 @@ body {
 
 <p>Interactive Templating with RactiveJS is demonstrated, with easily understandable code.</p>
 
-<a href="https://github.com/arkenidar/javascript-examples/tree/gh-pages" target="_blank">GitHub repository of this GitHub Page</a> <br>
-<a href="http://www.ractivejs.org" target="_blank">Home page of RactiveJS (#InteractiveTemplating)</a> <br>
+<a href="https://github.com/arkenidar/javascript-examples/tree/gh-pages" target="_blank"><b>GitHub repository</b> of this GitHub Page</a> <br>
+<a href="http://www.ractivejs.org" target="_blank">Home page of <b>RactiveJS (#InteractiveTemplating)</b></a> <br>
+<p><b>RactiveJS is a JavaScript framework for HTML5 Web Applications</b> <i>(software that works in an internet browser)</i>. <br>
+ It is used here with this basic and informative demonstrations. <br>
+ It has <b>similar goals</b> of <i>AngularJS</i> and <i>ReactJS</i>. It is <u><b>simpler</b></u> to apply (at least in my use cases). <br>
+ In this example page it is also demonstrated some use of <b>Material Design Lite (MDL)</b>. <br>
+ Some people use <b>Angular plus Angular Material</b>. Here I used <b>Ractive+MDL</b>. <br>
+ </p>
+ 
 
 <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   
@@ -40,8 +50,7 @@ Ractive.DEBUG = false;
 <div id="container_for_items_example"></div>
 <script id="template_for_items_example" type="text/ractive"> 
 <h4>#ractive_js Items listing 
-  (ported from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">ReactJS example</a>
-  )
+  (ported from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">#react_js example</a>)
 </h4>
 <style>
 .currency { text-align: right; }
@@ -191,7 +200,7 @@ $(function(){
       template: "#template_for_2way_example",
       data: {
         user: {
-          name: "Peppe",
+          name: "Mark",
           age: 45,
         }
       }
