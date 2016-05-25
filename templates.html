@@ -34,7 +34,8 @@ p, a { font-size: 150%; }
 <p><b>RactiveJS is a JavaScript framework for HTML5 Web Applications</b> <i>(software that works in an internet browser)</i>. <br>
  It is used here with this basic and informative demonstrations. <br>
  It has <b>similar goals</b> of <i>AngularJS</i> and <i>ReactJS</i>. It is <u><b>simpler</b></u> to apply (at least in my use cases). <br>
- In this example page it is also demonstrated some use of <b>Material Design Lite (MDL)</b>. <br>
+ In this example page it is also demonstrated some use of 
+ <b><a href="https://getmdl.io/" target="_blank">Material Design Lite (MDL)</a></b>. <br>
  Some people use <b>Angular plus Angular Material</b>. Here I used <b>Ractive plus Material Design Lite (MDL)</b>. <br>
  </p>
  
@@ -48,8 +49,6 @@ Ractive.DEBUG = false;
 </script>
 
 <!-- items example -->
-<div id="container_for_items_example"></div>
-<script id="template_for_items_example" type="text/ractive"> 
 <h4>#ractive_js Items listing 
   (<i>ported</i> from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">#react_js example</a>)
 </h4>
@@ -58,6 +57,9 @@ Ractive.DEBUG = false;
 .currency { text-align: right; }
 .not_stocked { color: red; }
 </style>
+<h5><i>Thinking in Ractive</i> (a port from Thinking in React)</h5>
+<div id="container_for_items_example"></div>
+<script id="template_for_items_example" type="text/ractive"> 
 <!-- <input id="items" placeholder="Search filter"><br> -->
 <div class="mdl-textfield mdl-js-textfield">
   <input class="mdl-textfield__input" type="text" id="items">
