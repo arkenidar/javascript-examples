@@ -30,6 +30,7 @@ p, a { font-size: 150%; }
 
 <a href="https://github.com/arkenidar/javascript-examples/tree/gh-pages" target="_blank"><b>GitHub repository</b> of this GitHub Page</a> <br>
 <a href="http://www.ractivejs.org" target="_blank">Home page of <b>RactiveJS (#InteractiveTemplating)</b></a> <br>
+ <br>
 <p><b>RactiveJS is a JavaScript framework for HTML5 Web Applications</b> <i>(software that works in an internet browser)</i>. <br>
  It is used here with this basic and informative demonstrations. <br>
  It has <b>similar goals</b> of <i>AngularJS</i> and <i>ReactJS</i>. It is <u><b>simpler</b></u> to apply (at least in my use cases). <br>
@@ -50,27 +51,28 @@ Ractive.DEBUG = false;
 <div id="container_for_items_example"></div>
 <script id="template_for_items_example" type="text/ractive"> 
 <h4>#ractive_js Items listing 
-  (ported from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">#react_js example</a>)
+  (<i>ported</i> from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">#react_js example</a>)
 </h4>
+<p>They are equivalent but the version coded in Ractive is shorter and simpler to reason about than the one in React.</p>
 <style>
 .currency { text-align: right; }
+.not_stocked { color: red; }
 </style>
 <!-- <input id="items" placeholder="Search filter"><br> -->
 <div class="mdl-textfield mdl-js-textfield">
-  <input class="mdl-textfield__input" type="text" id="items"  placeholder="Search filter">
-  <label class="mdl-textfield__label" for="items">Text...</label>
+  <input class="mdl-textfield__input" type="text" id="items">
+  <label class="mdl-textfield__label" for="items">Search...</label>
 </div>
-<!-- <input type="checkbox" id="available">hide unavailable items<br> -->
-<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="available">
-  <input type="checkbox" id="available" class="mdl-checkbox__input">
-  <span class="mdl-checkbox__label">hide unavailable items</span>
+<!-- <input type="checkbox" id="only_in_stock">Only show products in stock<br> -->
+<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="only_in_stock">
+  <input type="checkbox" id="only_in_stock" class="mdl-checkbox__input">
+  <span class="mdl-checkbox__label">Only show products in stock</span>
 </label>
 <table>
 {{#each items}}
     <tr>
-      <td>{{.name}}</td>
-      <td class="currency">{{ currency(.cost) }} </td> 
-      {{#if !.available}} <td> [unavailable] </td> {{/if}}
+      <td class="{{#if !.stocked}} not_stocked {{/if}}" >{{.name}}</td>
+      <td class="currency">{{ .price }} </td> 
     </tr>
 {{/each}}
 </table>
@@ -86,7 +88,7 @@ $(function(){
       template: "#template_for_items_example",
       data: {
         items: [],
-        currency: function(n){
+        dollar: function(n){ // formats numbers for dollar currency
             format = function(number, n, x) {
               var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
               return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
@@ -98,17 +100,20 @@ $(function(){
 
     function update_items(){
         var list=[];
-        var available_items=[
-            {name:"xxyy", available:true, cost: 10},
-            {name:"xxzz", available: true, cost: 5.20},
-            {name:"zzabc", available: false, cost: 1},
-            {name:"abc", available: true, cost: 15},
-            ];
+        var items=            
+            [
+            {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
+            {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
+            {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
+            {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
+            {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
+            {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
+            ]
         var query = $("#items").val();
-        var only_available = $("#available").is(":checked");
-        for(var i in available_items){
-            var item = available_items[i];
-            if(item.name.indexOf(query)!==-1 && (only_available?item.available:true) ){
+        var only_in_stock = $("#only_in_stock").is(":checked");
+        for(var i in items){
+            var item = items[i];
+            if(item.name.indexOf(query)!==-1 && (only_in_stock?item.stocked:true) ){
                list.push(item); 
             }
         }        
@@ -119,7 +124,7 @@ $(function(){
     // trigger update_items() in related situations
     update_items();
     $("#items").change(update_items); $("#items").keyup(update_items);
-    $("#available").change(update_items);
+    $("#only_in_stock").change(update_items);
 });
 </script>
   
