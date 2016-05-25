@@ -41,15 +41,24 @@ Ractive.DEBUG = false;
   (ported from a <a href="https://facebook.github.io/react/docs/thinking-in-react.html">ReactJS example</a>
   )
 </h2>
+<style>
+.currency { text-align: right; }
+</style>
 <input id="items" placeholder="Search filter"><br>
 <!-- <input type="checkbox" id="available">hide unavailable items<br> -->
 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="available">
   <input type="checkbox" id="available" class="mdl-checkbox__input">
   <span class="mdl-checkbox__label">hide unavailable items</span>
 </label>
+<table>
 {{#each items}}
-    {{.name}} {{#if !.available}} [unavailable]{{/if}}<br>
+    <tr>
+      <td>{{.name}}</td>
+      <td class="currency">{{ currency(.cost) }} </td> 
+      {{#if !.available}} <td> [unavailable] </td> {{/if}}
+    </tr>
 {{/each}}
+</table>
 </script>
 
 <script type="text/javascript">
@@ -61,17 +70,24 @@ $(function(){
       el: "#container_for_items_example",
       template: "#template_for_items_example",
       data: {
-        items: []
+        items: [],
+        currency: function(n){
+            format = function(number, n, x) {
+              var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+              return number.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+            };
+          return "$"+format(n, 2, 3); 
+        },
       }
     });
 
     function update_items(){
         var list=[];
         var available_items=[
-            {name:"xxyy", available:true},
-            {name:"xxzz", available: true},
-            {name:"zzabc", available: false},
-            {name:"abc", available: true},
+            {name:"xxyy", available:true, cost: 10},
+            {name:"xxzz", available: true, cost: 5.20},
+            {name:"zzabc", available: false, cost: 1},
+            {name:"abc", available: true, cost: 15},
             ];
         var query = $("#items").val();
         var only_available = $("#available").is(":checked");
