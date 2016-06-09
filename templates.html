@@ -73,8 +73,8 @@ Ractive.DEBUG = false;
 <table>
 {{#each items}}
     <tr>
-      <td class="{{#if !.stocked}} not_stocked {{/if}}" >{{.name}}</td>
-      <td class="currency">{{ .price }} </td> 
+      <td class="{{#if ! .stocked }}not_stocked{{/if}}" >{{ .name }}</td>
+      <td class="currency">{{ .price }}</td> 
     </tr>
 {{/each}}
 </table>
